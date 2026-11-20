@@ -4,19 +4,10 @@
   "api": "1.0.0",
   "main": "code.js",
   "ui": "ui.html",
-  "editorType": [
-    "figma",
-    "figjam",
-    "slides",
-    "dev"
-  ],
-  "capabilities": [
-    "inspect"
-  ],
+  "editorType": ["figma", "figjam", "slides", "dev"],
+  "capabilities": ["inspect"],
   "enablePrivatePluginApi": true,
-  "permissions": [
-    "teamlibrary"
-  ],
+  "permissions": ["teamlibrary"],
   "documentAccess": "dynamic-page",
   "networkAccess": {
     "allowedDomains": [
