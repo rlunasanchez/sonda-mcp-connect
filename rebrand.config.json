@@ -1,0 +1,10 @@
+{
+	"packageName": "sonda-mcp-connect",
+	"repositoryUrl": "git+https://github.com/rlunasanchez/sonda-mcp-connect.git",
+	"descriptionPrefix": "Sonda MCP Connect (fork of figma-console-mcp). ",
+	"pluginName": "Sonda MCP Connect Bridge",
+	"pluginId": "sonda-mcp-connect-bridge",
+	"readmeMarker": "<!-- sonda-rebrand -->",
+	"readmeTitle": "# Sonda MCP Connect",
+	"readmeNotice": "> **Sonda MCP Connect** is a fork of [southleft/figma-console-mcp](https://github.com/southleft/figma-console-mcp) (MIT License, Copyright (c) 2025 Figma Console MCP Contributors). It keeps the full read and write toolset and runs in **local mode only**: the cloud relay domain was removed from the plugin manifest. To pull upstream updates run `git fetch upstream`, merge, then `node scripts/rebrand.mjs`."
+}

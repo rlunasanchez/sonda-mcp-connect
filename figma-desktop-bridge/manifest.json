@@ -1,13 +1,22 @@
 {
-  "name": "Figma Desktop Bridge",
-  "id": "figma-desktop-bridge-mcp",
+  "name": "Sonda MCP Connect Bridge",
+  "id": "sonda-mcp-connect-bridge",
   "api": "1.0.0",
   "main": "code.js",
   "ui": "ui.html",
-  "editorType": ["figma", "figjam", "slides", "dev"],
-  "capabilities": ["inspect"],
+  "editorType": [
+    "figma",
+    "figjam",
+    "slides",
+    "dev"
+  ],
+  "capabilities": [
+    "inspect"
+  ],
   "enablePrivatePluginApi": true,
-  "permissions": ["teamlibrary"],
+  "permissions": [
+    "teamlibrary"
+  ],
   "documentAccess": "dynamic-page",
   "networkAccess": {
     "allowedDomains": [
@@ -32,11 +41,9 @@
       "ws://localhost:9229",
       "ws://localhost:9230",
       "ws://localhost:9231",
-      "ws://localhost:9232",
-      "wss://figma-console-mcp.southleft.com",
-      "https://figma-console-mcp.southleft.com"
+      "ws://localhost:9232"
     ],
-    "reasoning": "Connects to local MCP server via WebSocket (port range 9223-9232 for multi-instance), and optionally to the cloud relay for remote write access.",
+    "reasoning": "Connects to the local MCP server via WebSocket (port range 9223-9232 for multi-instance). No external network access.",
     "devAllowedDomains": [
       "http://localhost",
       "http://localhost:9223",
@@ -59,9 +66,7 @@
       "ws://localhost:9229",
       "ws://localhost:9230",
       "ws://localhost:9231",
-      "ws://localhost:9232",
-      "wss://figma-console-mcp.southleft.com",
-      "https://figma-console-mcp.southleft.com"
+      "ws://localhost:9232"
     ]
   }
 }

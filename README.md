@@ -1,4 +1,7 @@
-# Figma Console MCP Server
+# Sonda MCP Connect
+
+<!-- sonda-rebrand -->
+> **Sonda MCP Connect** is a fork of [southleft/figma-console-mcp](https://github.com/southleft/figma-console-mcp) (MIT License, Copyright (c) 2025 Figma Console MCP Contributors). It keeps the full read and write toolset and runs in **local mode only**: the cloud relay domain was removed from the plugin manifest. To pull upstream updates run `git fetch upstream`, merge, then `node scripts/rebrand.mjs`.
 
 [![MCP](https://img.shields.io/badge/MCP-Compatible-blue)](https://modelcontextprotocol.io/)
 [![npm](https://img.shields.io/npm/v/figma-console-mcp)](https://www.npmjs.com/package/figma-console-mcp)

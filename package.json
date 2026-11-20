@@ -1,12 +1,12 @@
 {
-	"name": "figma-console-mcp",
+	"name": "sonda-mcp-connect",
 	"version": "1.46.0",
-	"description": "The most comprehensive MCP server for Figma — design tokens, variables, components, write tools, version history diff, accessibility audits, FigJam, Slides, and more. Local (WebSocket Desktop Bridge plugin) and Cloudflare Workers (paired + remote) modes.",
+	"description": "Sonda MCP Connect (fork of figma-console-mcp). The most comprehensive MCP server for Figma — design tokens, variables, components, write tools, version history diff, accessibility audits, FigJam, Slides, and more. Local (WebSocket Desktop Bridge plugin) and Cloudflare Workers (paired + remote) modes.",
 	"type": "module",
 	"main": "dist/local.js",
 	"types": "dist/local.d.ts",
 	"bin": {
-		"figma-console-mcp": "./dist/local.js"
+		"sonda-mcp-connect": "./dist/local.js"
 	},
 	"files": [
 		"dist",
@@ -53,7 +53,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/southleft/figma-console-mcp.git"
+		"url": "git+https://github.com/rlunasanchez/sonda-mcp-connect.git"
 	},
 	"engines": {
 		"node": ">=18.0.0"
