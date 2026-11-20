@@ -20,22 +20,35 @@ Use the absolute path to `dist/local.js`.
 
 ```bash
 # macOS
-claude mcp add sonda-mcp-connect -- node /Users/<you>/sonda-mcp-connect/dist/local.js
+claude mcp add sonda-mcp-connect -- node --env-file=/Users/<you>/sonda-mcp-connect/.env /Users/<you>/sonda-mcp-connect/dist/local.js
 
 # Windows (PowerShell)
-claude mcp add sonda-mcp-connect -- node C:\Users\<you>\sonda-mcp-connect\dist\local.js
+claude mcp add sonda-mcp-connect -- node --env-file=C:\Users\<you>\sonda-mcp-connect\.env C:\Users\<you>\sonda-mcp-connect\dist\local.js
 ```
+
+`--env-file` (Node 20.6 or newer) makes Node read the token from `.env`, so the token never goes into the
+Claude Code configuration. The flag must come before the path to `dist/local.js`. Create the `.env` first (next step).
 
 Check it with `/mcp` inside Claude Code: `sonda-mcp-connect` must appear as connected.
 
-Optional: some tools use the Figma REST API and need a personal access token. Create it in Figma
-(Settings, Security) with the minimum scopes, and pass it only through the MCP client config:
+### The Figma token lives only in `.env`
+
+The plugin connects with a Figma personal access token. Create it in Figma (Settings, Security) with the
+minimum scopes, then:
 
 ```bash
-claude mcp add sonda-mcp-connect -e FIGMA_ACCESS_TOKEN=<token> -- node <path>/dist/local.js
+cp .env.example .env          # Windows: copy .env.example .env
+# edit .env and set FIGMA_ACCESS_TOKEN=<your token>
+chmod 600 .env                # macOS only; on Windows keep the file inside your user folder
 ```
 
-Never write the token in a file of this repository.
+- **The token never goes to the cloud.** `.env` is git-ignored: never commit it, never paste it in a chat
+  (Claude included), and keep this folder outside OneDrive, iCloud, Dropbox and Google Drive synced folders.
+- Turn on the commit guard once per clone: `git config core.hooksPath .githooks`. It blocks any staged `.env`
+  file and any text that looks like a Figma token.
+- Do not use `claude mcp add -e FIGMA_ACCESS_TOKEN=...`: that would store the token in the Claude Code configuration too.
+- Check before every push: `git status` must not list `.env`.
+- If the token is ever exposed, revoke it in Figma and create a new one.
 
 ## 3. Import the plugin in Figma
 

@@ -1,0 +1,19 @@
+#!/bin/sh
+# Blocks commits that would send secrets to the cloud (GitHub).
+# Enable once per clone:  git config core.hooksPath .githooks
+
+staged=$(git diff --cached --name-only --diff-filter=ACM)
+
+# 1) Any .env file except .env.example
+if echo "$staged" | grep -E '(^|/)\.env(\.[A-Za-z0-9_-]+)?$' | grep -vE '\.env\.example$' | grep -q .; then
+	echo "BLOCKED: an .env file is staged. It holds the Figma token and must never be committed."
+	exit 1
+fi
+
+# 2) Figma personal access token patterns in added lines
+if git diff --cached -U0 | grep -E '^\+' | grep -Eq 'fig[du]_[A-Za-z0-9_-]{20,}'; then
+	echo "BLOCKED: a Figma token pattern was found in the staged changes."
+	exit 1
+fi
+
+exit 0
