@@ -77,3 +77,11 @@ npm ci && npm run build:local && npm test
 
 Review new dependencies, install scripts and network calls before merging into `main`.
 The branch `upstream-mirror` is an untouched copy of the original at v1.46.0.
+
+## 6. Status and pending (notes for the next session)
+
+- Built and pushed, **not yet compiled or tested in Figma**: run step 1 to 3 and check that the bridge plugin shows as connected.
+- The Figma token lives only in the local `.env` (loaded with `node --env-file`). Never in the cloud, a chat or a synced folder.
+- This repository is a **public fork** (GitHub does not allow private forks). Pending: duplicate it into a private repository, keep the `upstream` remote and delete the public fork.
+- Optional hardening: require a shared token on the local WebSocket (today it accepts connections without an origin or with origin `null`). Keep it as an isolated patch, it touches `src/core/websocket-server.ts` and `figma-desktop-bridge/ui.html`.
+- This plugin is separate from the `sonda-figma-to-fullstack` skill (private repo `rlunasanchez/sonda-skill`, see its `docs/NOTAS-COMPLETAS.md`). They only share the MCP connection.
