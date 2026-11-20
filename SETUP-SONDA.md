@@ -20,11 +20,14 @@ Use the absolute path to `dist/local.js`.
 
 ```bash
 # macOS
-claude mcp add sonda-mcp-connect -- node --env-file=/Users/<you>/sonda-mcp-connect/.env /Users/<you>/sonda-mcp-connect/dist/local.js
+claude mcp add --scope user sonda-mcp-connect -- node --env-file=/Users/<you>/sonda-mcp-connect/.env /Users/<you>/sonda-mcp-connect/dist/local.js
 
 # Windows (PowerShell)
-claude mcp add sonda-mcp-connect -- node --env-file=C:\Users\<you>\sonda-mcp-connect\.env C:\Users\<you>\sonda-mcp-connect\dist\local.js
+claude mcp add --scope user sonda-mcp-connect -- node --env-file=C:\Users\<you>\sonda-mcp-connect\.env C:\Users\<you>\sonda-mcp-connect\dist\local.js
 ```
+
+`--scope user` makes the server available in every folder (without it, it only exists in the folder where you ran
+the command, and the skill would not see it when you work in another project folder).
 
 `--env-file` (Node 20.6 or newer) makes Node read the token from `.env`, so the token never goes into the
 Claude Code configuration. The flag must come before the path to `dist/local.js`. Create the `.env` first (next step).
