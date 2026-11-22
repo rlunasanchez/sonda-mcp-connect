@@ -215,6 +215,9 @@
       height: 14px;
     }
 
+    /* SONDA: cloud mode removed from the UI */
+    #cloud-icon, #cloud-pair, #cloud-help, #cloud-status { display: none !important; }
+
     /* ===== Row: cloud pairing (when cloud icon on) ===== */
     .row {
       display: none;
@@ -1727,7 +1730,9 @@
     // CLOUD MODE — Connect to remote relay via pairing code
     // ============================================================================
     var cloudWs = null;
-    var CLOUD_RELAY_HOST = 'wss://figma-console-mcp.southleft.com';
+    // SONDA: cloud mode is permanently disabled. No remote host is configured and
+    // cloudDial() refuses to open any socket, so nothing leaves localhost.
+    var CLOUD_RELAY_HOST = '';
     var _lastCloudCode = null;              // most recent code that successfully paired
     var _cloudUserDisconnected = false;     // user clicked Disconnect — suppress auto re-dial
     var _cloudWasConnectedBeforePause = false; // restore cloud on Resume after Pause
@@ -2285,6 +2290,12 @@
     // restored-config auto-connect, and Resume-after-Pause. `isAuto` softens
     // the error UX for background attempts and arms the bounded retry chain.
     function cloudDial(code, isAuto) {
+      // SONDA: cloud mode disabled. Never open a remote WebSocket.
+      if (!CLOUD_RELAY_HOST) {
+        var offEl = document.getElementById('cloud-status');
+        if (offEl && !isAuto) { offEl.textContent = 'Cloud mode is disabled in this build.'; offEl.className = 'cloud-status error'; }
+        return;
+      }
       var btn = document.getElementById('cloud-btn');
       var statusEl = document.getElementById('cloud-status');
 
