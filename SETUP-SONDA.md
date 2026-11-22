@@ -88,3 +88,19 @@ The branch `upstream-mirror` is an untouched copy of the original at v1.46.0.
 - This repository is a **public fork** (GitHub does not allow private forks). Pending: duplicate it into a private repository, keep the `upstream` remote and delete the public fork.
 - Optional hardening: require a shared token on the local WebSocket (today it accepts connections without an origin or with origin `null`). Keep it as an isolated patch, it touches `src/core/websocket-server.ts` and `figma-desktop-bridge/ui.html`.
 - This plugin is separate from the `sonda-figma-to-fullstack` skill (private repo `rlunasanchez/sonda-skill`, see its `docs/NOTAS-COMPLETAS.md`). They only share the MCP connection.
+
+## 7. Consumo de tokens: `SONDA_TOOLS`
+
+Cada conversacion envia al modelo la definicion de todas las herramientas publicadas. Con las 130 son unos
+54.000 tokens. `SONDA_TOOLS` en el `.env` elige cuales publicar (lo lee el servidor al arrancar; reinicia el cliente):
+
+| Valor | Herramientas | Tokens aprox. | Para que |
+|---|---|---|---|
+| `esencial` | 13 | 6.000 | Leer el archivo abierto, ejecutar codigo en Figma (`figma_execute`), capturas. Basta para la skill. |
+| `diseno` | 32 | 12.500 | Lo anterior + crear y editar nodos, variables y componentes. |
+| `todo` o sin definir | 130 | 54.500 | Comportamiento original. |
+| lista | las que indiques | segun | Por ejemplo `esencial,figma_get_comments` (los comentarios necesitan token). |
+
+Un nombre mal escrito se avisa por stderr (`[sonda] SONDA_TOOLS: no such tool(s)...`). El codigo esta en
+`src/core/tool-profiles.ts` y se engancha con una linea en `createMcpServer()` de `src/local.ts`
+(al traer cambios del original, revisa que esa linea siga ahi).

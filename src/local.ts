@@ -44,6 +44,7 @@ import { registerMultiFileTools } from "./core/multi-file-tools.js";
 import { registerDesignSystemExtractionTools } from "./core/design-system-extraction-tools.js";
 import { registerTokensTools } from "./core/tokens-tools.js";
 import { wrapServerForIdentity } from "./core/identity.js";
+import { applyToolProfile } from "./core/tool-profiles.js";
 import { PACKAGE_ROOT } from "./core/resolve-package-root.js";
 import type { IFigmaConnector } from "./core/figma-connector.js";
 import { FigmaWebSocketServer, getBundledPluginVersion, getServerVersion } from "./core/websocket-server.js";
@@ -261,6 +262,8 @@ If Design Systems Assistant MCP is not available, install it from: https://githu
 		// so LLMs can attribute output unambiguously when multiple Figma-related
 		// MCPs are connected. Idempotent for already-tagged responses.
 		wrapServerForIdentity(server, { onToolCall: noteToolCall });
+		// SONDA: publish only the tools selected by SONDA_TOOLS (fewer tokens per conversation).
+		applyToolProfile(server);
 		return server;
 	}
 
